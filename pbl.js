@@ -1,87 +1,144 @@
 
-//coletar informações e nascimeto
-//coletar caracteristicas fisicas
-//microcefalia S/N
-//problemas cardiacos S/N
-//diabetes S/N
-//plano de saude S/N
 
 var prompt = require('prompt-sync')();
 //count
-var countMale = 0;
-var countFemale = 0;
-var countPlano = 0;
-var countCardio = 0;
-var countMicro = 0;
-var countAno = 0;
-var countCrianca = 0;
-var crianca = [];
+var counterMale = 0;
+var counterFemale = 0;
+var counterHealthInsurance = 0;
+var counterHeartProblem = 0;
+var counterMicrocephaly = 0;
+var counterCurrentYear = 0;
+var child = [];
 var stopCondition = true;
 
 while (stopCondition) {
-  var cadastro = prompt('Deseja cadastrar alguma criança ? S/N ')
-  if (cadastro.toLowerCase() == 's') {
+  var childRegistration = prompt('Deseja cadastrar alguma criança ? S/N ')
+  if (childRegistration.toLowerCase() == 's') {
     stopCondition = true;
 
-    var dia = prompt('Qual dia a criança nasceu ? ');
+    var stopConditionDay = true;
+    while (stopConditionDay) {
+      var birthday = prompt('Qual dia a criança nasceu ? ');
+      if (birthday > 31) {
+        console.log("Dia inexistente, digite novamente")
+        stopConditionDay = true;
+      } else {
+        stopConditionDay = false;
+      }
+    };
+    var stopConditionMonth = true;
+    while (stopConditionMonth) {
+      var birthMonth = prompt('Qual o mes a criança nasceu ? ');
+      if (birthMonth > 12) {
+        console.log("Mes inexistente, digite novamente")
+        stopConditionMonth = true;
+      } else {
+        stopConditionMonth = false;
+      }
+    };
+    var stopConditionYear = true;
+    while (stopConditionYear) {
+      var birthYear = prompt('Qual o ano a criança nasceu ? ');
+      if (birthYear > 2022) {
+        console.log("Mes inexistente, digite novamente")
+        stopConditionYear = true;
+      } else {
+        stopConditionYear = false;
+      }
 
-    var mes = prompt('Qual o mes a criança nasceu ? ');
+    };
 
-    var ano = prompt('Qual o ano a criança nasceu ? ');
+    var questionWeight = prompt('Qual o peso da criança ? ');
 
-    var questPeso = prompt('Qual o peso da criança ? ');
+    var stopConditionGender = true
+    while (stopConditionGender) {
+      var questionGender = prompt('Qual o sexo da criança ? ');
 
-    var questSexo = prompt('Qual o sexo da criança ? ');
+      if (questionGender == "masculino") {
+        counterMale++
+        stopConditionGender = false
+      }
+      else if (questionGender == "feminino") {
+        counterFemale++
+        stopConditionGender = false
+      } else {
+        stopConditionGender = true
+        console.log('Digite um sexo valido')
+      }
+    }
 
-    var microcefalia = prompt('A criança possui microcefalia ? S/N ');
+    var stopConditionMicrocephaly = true
+    while (stopConditionMicrocephaly) {
+      var hasMicrocephaly = prompt('A criança possui microcefalia ? S/N ');
 
-    var problemaCardiaco = prompt('A criança possui problemas cardiaco ? S/N ');
+      if (hasMicrocephaly.toLowerCase() == 's') {
+        stopConditionMicrocephaly = false
+        counterMicrocephaly++
+      }
+      else if (hasMicrocephaly.toLowerCase() == 'n') {
+        stopConditionMicrocephaly = false
+      }
+      else {
+        stopConditionMicrocephaly = true
+        console.log("digite S/N")
+      };
+    };
 
-    var antonio = prompt('A criança possui diabetes ? S/N ');
+    var stopConditionHeartproblem = true
+    while (stopConditionHeartproblem) {
+      var hasHeartProblem = prompt('A criança possui problemas cardiaco ? S/N ');
+      if (hasHeartProblem.toLowerCase() == 's') {
+        counterHeartProblem++
+        stopConditionHeartproblem = false
+      }
+      else if (hasHeartProblem.toLowerCase() == 'n') {
+        stopConditionHeartproblem = false
+      }
+      else {
+        console.log('digite S/N')
+        stopConditionHeartproblem = true
+      }
+    };
 
-    var plano = prompt('A criança possui plano de saúde ? S/N ');
+    var stopConditionHealthInsurence = true
+    while (stopConditionHealthInsurence) {
+      var hasHealthInsurance = prompt('A criança possui plano de saúde ? S/N ');
+
+      if (hasHealthInsurance.toLowerCase() == 'n') {
+        counterHealthInsurance++
+        stopConditionHealthInsurence = false
+      }
+      else if (hasHealthInsurance.toLowerCase() == 's') {
+        stopConditionHealthInsurence = false
+      }
+      else {
+        stopConditionHealthInsurence = true
+        console.log('digite S/N')
+      };
+    }
 
     var allInfo = {
-      Data: `${dia}/${mes}/${ano}`,
-      Caracteristicas: {
-        Peso: `${questPeso} kg`,
-        sexo: `${questSexo}`
+      data: `${birthday}/${birthMonth}/${birthYear}`,
+      caracteristicas: {
+        peso: `${questionWeight} kg`,
+        sexo: `${questionGender}`
       },
-      Enfermidade: {
-        Microcefalia: `${microcefalia}`,
-        ProblemaCardiaco: `${problemaCardiaco}`,
-        diabetes: `${antonio}`
+      enfermidade: {
+        microcefalia: `${hasMicrocephaly}`,
+        problemaCardiaco: `${hasHeartProblem}`,
       },
-      PlanoDeSaude: `${plano}`
+      planoDeSaude: `${hasHealthInsurance}`
     }
 
-    countCrianca++;
-    crianca.push(allInfo);
+    child.push(allInfo);
 
-    if (ano == 2022) {
-      countAno++
+    if (birthYear == 2022) {
+      counterCurrentYear++
     };
-
-    if (microcefalia.toLowerCase() == 's') {
-      countMicro++
-    };
-
-    if (problemaCardiaco.toLowerCase() == 's') {
-      countCardio++
-    };
-
-    if (plano.toLowerCase() == 'n') {
-      countPlano++
-    };
-    if (questSexo == 'masculino') {
-      countMale++
-    } else if (questSexo == 'feminino') {
-      countFemale++
-    }
   }
 
 
-  else if (cadastro.toLowerCase() == 'n') {
+  else if (childRegistration.toLowerCase() == 'n') {
     stopCondition = false;
     console.log("cadastro finalizado ")
   } else {
@@ -92,23 +149,17 @@ while (stopCondition) {
 
 
 //relatorio
-//quantas crianças foram cadastradas
-//quantas crianças nasceram no ano corrente
-//o percentual de crianças com microcefalia
-//o percentual de crianças com problemas cardiacos
-//percentual de crianças sem planos de saude
-//o percentual de meninos e meninas
 function porcentagem(numCasos, numCadastro) {
   return (numCasos / numCadastro) * 100;
 }
 
-console.log(crianca)
+console.log(child)
 console.log('--------------RELATÓRIO---------------\n')
-console.log(`${countCrianca} crianças cadastradas`)
-console.log(`${countAno} crianças nasceram no ano corrente `)
-console.log(`${porcentagem(countMicro, countCrianca)}% de crianças com microcefalia`)
-console.log(`${porcentagem(countCardio, countCrianca)}% de crianças com problemas cardiacos`)
-console.log(`${porcentagem(countPlano, countCrianca)}% das crianças não tem plano de saúde`)
-console.log(`${porcentagem(countMale, countCrianca)}% das crianças são garotos`)
-console.log(`${porcentagem(countFemale, countCrianca)}% das crianças são garotas`)
+console.log(`${child.length} crianças cadastradas`)
+console.log(`${counterCurrentYear} crianças nasceram no ano corrente `)
+console.log(`${porcentagem(counterMicrocephaly, child.length)}% de crianças com microcefalia`)
+console.log(`${porcentagem(counterHeartProblem, child.length)}% de crianças com problemas cardiacos`)
+console.log(`${porcentagem(counterHealthInsurance, child.length)}% das crianças não tem plano de saúde`)
+console.log(`${porcentagem(counterMale, child.length)}% das crianças são garotos`)
+console.log(`${porcentagem(counterFemale, child.length)}% das crianças são garotas`)
 
