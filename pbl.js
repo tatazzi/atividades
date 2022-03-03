@@ -19,19 +19,24 @@ while (stopCondition) {
     var stopConditionDay = true;
     while (stopConditionDay) {
       var birthday = prompt('Qual dia a criança nasceu ? ');
-      if (birthday > 31) {
+      if (birthday > 31 || birthday < 0) {
         console.log("Dia inexistente, digite novamente")
         stopConditionDay = true;
-      } else {
+      } else if (isNaN(birthday)) {
+        console.log("Digite apenas numeros")
+      }
+      else {
         stopConditionDay = false;
       }
     };
     var stopConditionMonth = true;
     while (stopConditionMonth) {
       var birthMonth = prompt('Qual o mes a criança nasceu ? ');
-      if (birthMonth > 12) {
+      if (birthMonth > 12 || birthMonth < 0) {
         console.log("Mes inexistente, digite novamente")
         stopConditionMonth = true;
+      } else if (isNaN(birthMonth)) {
+        console.log("Digite apenas numeros")
       } else {
         stopConditionMonth = false;
       }
@@ -39,16 +44,26 @@ while (stopCondition) {
     var stopConditionYear = true;
     while (stopConditionYear) {
       var birthYear = prompt('Qual o ano a criança nasceu ? ');
-      if (birthYear > 2022) {
-        console.log("Mes inexistente, digite novamente")
+      if (birthYear > 2022 || birthYear > 2000) {
+        console.log("Ano inexistente, digite novamente")
         stopConditionYear = true;
+      }
+      else if (isNaN(birthYear)) {
+        console.log("Digite apenas numeros")
       } else {
         stopConditionYear = false;
       }
 
     };
-
-    var questionWeight = prompt('Qual o peso da criança ? ');
+    var stopConditionWeight = true
+    while (stopConditionWeight) {
+      var questionWeight = prompt('Qual o peso da criança ? ');
+      if (isNaN(questionWeight)) {
+        console.log("Digite apenas numeros")
+      } else {
+        stopConditionWeight = false
+      }
+    };
 
     var stopConditionGender = true
     while (stopConditionGender) {
